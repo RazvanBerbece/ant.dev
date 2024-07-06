@@ -11,11 +11,3 @@ resource "google_service_account_iam_binding" "github-tf-manager-service-account
     "serviceAccount:${google_service_account.github-tf-manager-service-account.email}",
   ]
 }
-
-resource "google_service_account_iam_binding" "github-tf-manager-service-account-billing-iam" {
-  service_account_id = google_service_account.github-tf-manager-service-account.name
-  role               = "roles/billing.admin"
-  members = [
-    "serviceAccount:${google_service_account.github-tf-manager-service-account.email}",
-  ]
-}
