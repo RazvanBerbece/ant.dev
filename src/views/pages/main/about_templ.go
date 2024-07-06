@@ -36,7 +36,7 @@ func About() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div id=\"main\" class=\"p-8 flex justify-center\"><div class=\"w-10/12 dark:text-white dark:bg-slate-800\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div id=\"main\" class=\"p-8 flex justify-center\"><div class=\"w-10/12 bg-blue-100 dark:text-white dark:bg-slate-800\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

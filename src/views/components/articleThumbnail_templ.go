@@ -37,7 +37,7 @@ func ArticleThumbnail(id int, articleName string, previewText string, createdAt 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"text-current\"><div class=\"mt-6 dark:bg-slate-800 hover:bg-gray-500 cursor-pointer\"><p class=\"text-xl font-semibold\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"text-current\"><div class=\"mt-6 cursor-pointer hover:bg-blue-200 dark:bg-slate-800 dark:hover:bg-gray-500\"><p class=\"text-xl font-semibold\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -50,7 +50,7 @@ func ArticleThumbnail(id int, articleName string, previewText string, createdAt 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><hr><p class=\"mt-2 italic text-base\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><hr class=\"border-gray-400 dark:border-white\"><p class=\"mt-2 italic text-base\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,14 +63,14 @@ func ArticleThumbnail(id int, articleName string, previewText string, createdAt 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><span class=\"inline-block mt-2 px-2 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full dark:text-gray-200 dark:bg-gray-700\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><span class=\"inline-block mt-2 px-2 py-1 text-sm font-semibold text-black bg-gray-400 rounded-full dark:text-gray-200 dark:bg-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(createdAt)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/views/components/articleThumbnail.templ`, Line: 11, Col: 154}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/views/components/articleThumbnail.templ`, Line: 11, Col: 151}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {

@@ -19,11 +19,11 @@ templ Index() {
 		@common.Head("ant.dev | Home")
 		<body>
 			<div id="main" class="p-8 flex justify-center">
-				<div class="w-10/12 dark:text-white dark:bg-slate-800">
+				<div class="w-10/12 bg-blue-100 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
 						<div id="latest-articles-wrapper" class="p-6 w-6/12">
-							<h1 class="pb-1 text-3xl">My Latest Work </h1>
+							<p class="pb-1 text-3xl">My Latest Work </p>
 							for _, article := range publishings.PublishedArticles {
 								@components.ArticleThumbnail(article.Id, article.Title, article.TextPreview, time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"))
 							}
