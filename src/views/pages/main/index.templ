@@ -7,6 +7,8 @@ import (
 	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
 )
 
+var RecentArticlesCountParam = 3 // display the first N most recent articles
+
 templ Index() {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -24,6 +26,7 @@ templ Index() {
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
 						<div id="latest-articles-wrapper" class="p-6 w-6/12">
 							<p class="pb-1 text-3xl">My Latest Work </p>
+							// Get last RecentArticlesCountParam articles published and display them
 							for _, article := range publishings.PublishedArticles {
 								@components.ArticleThumbnail(article.Id, article.Title, article.TextPreview, time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"))
 							}

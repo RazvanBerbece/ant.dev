@@ -21,8 +21,10 @@ templ Article__1BrcCsharp(createdAt int64) {
 					@common.Navbar()
 					<div id="content-wrapper" class="p-12 dark:text-white dark:bg-slate-800">
 						<b class="text-3xl"> 1BRC: My Not-Very-Sophisticated C# Attempt </b>
-						<h1> Work in progress. </h1>
-						<h1> Created on: { time.Unix(createdAt, 0).UTC().Format("January 2, 2006") } </h1>
+						<div class="mt-4">
+							<h1> Work in progress. </h1>
+						</div>
+						<p class="mt-4 italic"> Created on: { time.Unix(createdAt, 0).UTC().Format("January 2, 2006") } </p>
 					</div>
 					@common.Footer()
 				</div>

@@ -47,20 +47,20 @@ func Article__1BrcCsharp(createdAt int64) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-12 dark:text-white dark:bg-slate-800\"><b class=\"text-3xl\">1BRC: My Not-Very-Sophisticated C# Attempt </b><h1>Work in progress. </h1><h1>Created on: ")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-12 dark:text-white dark:bg-slate-800\"><b class=\"text-3xl\">1BRC: My Not-Very-Sophisticated C# Attempt </b><div class=\"mt-4\"><h1>Work in progress. </h1></div><p class=\"mt-4 italic\">Created on: ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(time.Unix(createdAt, 0).UTC().Format("January 2, 2006"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/views/pages/publishings/1_1BrcC#.templ`, Line: 25, Col: 80}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/views/pages/publishings/1_1BrcC#.templ`, Line: 27, Col: 99}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

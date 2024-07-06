@@ -6,12 +6,12 @@ import (
 
 //
 // New articles are created with the following process :
-// 1. Write a Templ page component for the new article
-// 2. Add a new entry to the slice below, where the ID is an incrementing integer and the component is the newly created one from step 1.
+// 	1. Write a Templ page component for the new article
+// 	2. Add a new entry to the slice below, where the ID is an incrementing integer and the component is the newly created one from step 1.
 //
 // Note: This list dictates which routes for articles with a given ID actually exist,
-// so if a user requests an article with ID 99999, and that ID is not in this list,
-// then the server will respond with a 404 Not Found.
+// 		 so if a user requests an article with ID 99999, and that ID is not in this list,
+// 		 then the server will respond with a 404 Not Found.
 //
 
 var PublishedArticles = []domain.Article{
