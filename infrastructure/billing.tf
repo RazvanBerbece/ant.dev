@@ -29,7 +29,7 @@ resource "google_billing_budget" "budget" {
 }
 
 resource "google_monitoring_notification_channel" "budget_notification_channel" {
-  display_name = "Main Budget Notification Channel"
+  display_name = "Main Budget Notification Channel (Email)"
   type         = "email"
 
   labels = {
