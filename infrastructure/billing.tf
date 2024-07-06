@@ -23,7 +23,7 @@ resource "google_billing_budget" "budget" {
     monitoring_notification_channels = [
       google_monitoring_notification_channel.budget_notification_channel.id,
     ]
-    disable_default_iam_recipients = false
+    disable_default_iam_recipients  = false
     enable_project_level_recipients = true
   }
 }
