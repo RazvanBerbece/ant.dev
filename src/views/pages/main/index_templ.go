@@ -11,6 +11,8 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"github.com/RazvanBerbece/ant.dev/src/views/common"
 	"github.com/RazvanBerbece/ant.dev/src/views/components"
+	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
+	"time"
 )
 
 func Index() templ.Component {
@@ -47,21 +49,15 @@ func Index() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 dark:text-white dark:bg-slate-800\"><div id=\"latest-articles-wrapper\" class=\"p-6 w-6/12\"><h1 class=\"text-3xl\">My Latest Work </h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 dark:text-white dark:bg-slate-800\"><div id=\"latest-articles-wrapper\" class=\"p-6 w-6/12\"><h1 class=\"pb-1 text-3xl\">My Latest Work </h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArticleThumbnail(1, "1BRC: My Not-Very-Sophisticated C# Approach", "Lorem ipsum dolores es", "Mar 25, 2024").Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = components.ArticleThumbnail(2, "How I made a fun blog with Go, Templ and a Sprinkle of HTMX", "Lorem ipsum dolores es", "Apr 25, 2024").Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = components.ArticleThumbnail(3, "How it's made - OTA Discord Community Bot Swarm", "Lorem ipsum dolores es", "Jun 25, 2024").Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		for _, article := range publishings.PublishedArticles {
+			templ_7745c5c3_Err = components.ArticleThumbnail(article.Id, article.Title, article.TextPreview, time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006")).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div>")
 		if templ_7745c5c3_Err != nil {

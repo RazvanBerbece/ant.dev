@@ -1,8 +1,10 @@
 package pages
 
 import (
+	"time"
 	"github.com/RazvanBerbece/ant.dev/src/views/common"
 	"github.com/RazvanBerbece/ant.dev/src/views/components"
+	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
 )
 
 templ Index() {
@@ -20,14 +22,11 @@ templ Index() {
 				<div class="w-10/12 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-						// <div id="home-paragraph-wrapper" class="text-center">
-						// 	<h1> Hello World! </h1>
-						// </div>
 						<div id="latest-articles-wrapper" class="p-6 w-6/12">
-							<h1 class="text-3xl">My Latest Work </h1>
-							@components.ArticleThumbnail(1, "1BRC: My Not-Very-Sophisticated C# Approach", "Lorem ipsum dolores es", "Mar 25, 2024")
-							@components.ArticleThumbnail(2, "How I made a fun blog with Go, Templ and a Sprinkle of HTMX", "Lorem ipsum dolores es", "Apr 25, 2024")
-							@components.ArticleThumbnail(3, "How it's made - OTA Discord Community Bot Swarm", "Lorem ipsum dolores es", "Jun 25, 2024")
+							<h1 class="pb-1 text-3xl">My Latest Work </h1>
+							for _, article := range publishings.PublishedArticles {
+								@components.ArticleThumbnail(article.Id, article.Title, article.TextPreview, time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"))
+							}
 						</div>
 					</div>
 					@common.Footer()

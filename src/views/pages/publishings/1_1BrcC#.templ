@@ -1,8 +1,11 @@
 package publishings
 
-import "github.com/RazvanBerbece/ant.dev/src/views/common"
+import (
+	"time"
+	"github.com/RazvanBerbece/ant.dev/src/views/common"
+)
 
-templ Article__1BrcCsharp(createdAtDate string) {
+templ Article__1BrcCsharp(createdAt int64) {
 	<!DOCTYPE html>
 	<html lang="en">
 		// <body>
@@ -16,9 +19,10 @@ templ Article__1BrcCsharp(createdAtDate string) {
 			<div id="main" class="p-8 flex justify-center">
 				<div class="w-10/12 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
-					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-						<h1> 1BRC - Work in progress. </h1>
-						<h1> Created on: { createdAtDate } </h1>
+					<div id="content-wrapper" class="p-12 dark:text-white dark:bg-slate-800">
+						<b class="text-3xl"> 1BRC: My Not-Very-Sophisticated C# Attempt </b>
+						<h1> Work in progress. </h1>
+						<h1> Created on: { time.Unix(createdAt, 0).UTC().Format("January 2, 2006") } </h1>
 					</div>
 					@common.Footer()
 				</div>
