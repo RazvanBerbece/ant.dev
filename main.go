@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/RazvanBerbece/ant.dev/src/handlers"
-	"github.com/RazvanBerbece/ant.dev/src/views/pages"
+	pages "github.com/RazvanBerbece/ant.dev/src/views/pages/main"
 	"github.com/a-h/templ"
 )
 

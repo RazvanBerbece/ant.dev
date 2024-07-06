@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/RazvanBerbece/ant.dev/src/domain"
-	"github.com/RazvanBerbece/ant.dev/src/views/pages"
 	errPages "github.com/RazvanBerbece/ant.dev/src/views/pages/err"
+	pages "github.com/RazvanBerbece/ant.dev/src/views/pages/main"
 	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
 	"github.com/a-h/templ"
 )
@@ -24,6 +24,7 @@ func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
 
 			idAsInt, err := strconv.Atoi(articleId)
 			if err != nil {
+				// Invalid ID for an Article
 				errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an invalid ID: %s%s?id=%s", r.Host, r.URL.Path, articleId), 400).Render(r.Context(), w)
 				return
 			}

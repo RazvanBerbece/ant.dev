@@ -2,7 +2,7 @@ package publishings
 
 import "github.com/RazvanBerbece/ant.dev/src/views/common"
 
-templ Article__1BrcCsharp() {
+templ Article__1BrcCsharp(createdAtDate string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		// <body>
@@ -17,7 +17,8 @@ templ Article__1BrcCsharp() {
 				<div class="w-10/12 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-						<h1>Work in progress 1BRC. </h1>
+						<h1> 1BRC - Work in progress. </h1>
+						<h1> Created on: { createdAtDate } </h1>
 					</div>
 					@common.Footer()
 				</div>
