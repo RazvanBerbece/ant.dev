@@ -21,3 +21,15 @@ variable "GCP_CREDENTIALS" {
   sensitive   = true
   description = "Google Cloud service account credentials"
 }
+
+variable "BUDGET_ALERT_CHANNEL_EMAIL" {
+  type        = string
+  sensitive   = true
+  description = "Email to which budget usage alerts are sent to"
+}
+
+variable "BILLING_ACCOUNT_ID" {
+  type        = string
+  sensitive   = true
+  description = "The ID of the billing account associated with the Google Cloud project"
+}
