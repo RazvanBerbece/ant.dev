@@ -20,10 +20,10 @@ func main() {
 	http.Handle("/contact", templ.Handler(pages.Contact()))
 
 	// Complex page handlers
-	http.HandleFunc("/articles", handlers.HandleArticleRequest)
+	http.HandleFunc("/articles", handlers.HandleArticleRequest) // /articles, /articles?id=
 
 	fmt.Printf("Listening on port: %d | Index: /\n", Port)
 
-	// Blocking call! - Listen and server
+	// Blocking call! - Listen and serve
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", Port), nil))
 }
