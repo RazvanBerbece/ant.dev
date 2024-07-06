@@ -4,6 +4,7 @@
 .git/
 
 .dockerignore
+docker-compose.yml
 Dockerfile
 
 test/
@@ -15,3 +16,5 @@ build/
 *.md
 
 infrastructure/
+
+src/views/**/*.templ
