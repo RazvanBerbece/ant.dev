@@ -1,0 +1,26 @@
+package errPages
+
+import (
+	"github.com/RazvanBerbece/ant.dev/src/views/common"
+	"fmt"
+)
+
+templ ErrGeneric(msg string, statusCode int) {
+	<!DOCTYPE html>
+	<html lang="en">
+		@common.Head("ant.dev | Error")
+		<body>
+			<div id="main" class="p-8 flex justify-center">
+				<div class="w-10/12 dark:text-white dark:bg-slate-800">
+					@common.Navbar()
+					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
+						<b class="text-2xl">An error ocurred while processing your request.</b>
+						<p>Error message: <code> { msg } </code></p>
+						<p>Status Code: { fmt.Sprintf("%d", statusCode) }</p>
+					</div>
+					@common.Footer()
+				</div>
+			</div>
+		</body>
+	</html>
+}

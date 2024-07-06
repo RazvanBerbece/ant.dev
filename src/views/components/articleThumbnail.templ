@@ -3,10 +3,12 @@ package components
 import "fmt"
 
 templ ArticleThumbnail(id int, articleName string, previewText string, createdAt string) {
-	<div class="mt-6 dark:bg-slate-800 hover:bg-gray-500 cursor-pointer">
-		<a href={templ.URL(fmt.Sprintf("/articles/%d", id))} class="text-current"> { articleName } </a>
-		<hr/>
-		<p> { previewText } </p>
-		<h5> { createdAt } </h5>
-	</div>
+	<a href={templ.URL(fmt.Sprintf("/articles?id=%d", id))} class="text-current"> 
+		<div class="mt-6 dark:bg-slate-800 hover:bg-gray-500 cursor-pointer">
+			{ articleName } 
+			<hr/>
+			<p> { previewText } </p>
+			<h5> { createdAt } </h5>
+		</div>
+	</a>
 }

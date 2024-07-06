@@ -1,23 +1,19 @@
-package pages
+package errPages
 
 import "github.com/RazvanBerbece/ant.dev/src/views/common"
 
-templ About() {
+templ ErrNotFound(topic string) {
 	<!DOCTYPE html>
 	<html lang="en">
-		// <body>
-		// 	// HTMX swaps will swap the inner div below with the responses from the server
-		// 	<div id="main-content-container">
-		// 		// all sorts of components in here
-		// 	</div>
-		// </body>
-		@common.Head("ant.dev | About")
+		@common.Head("ant.dev | Not Found")
 		<body>
 			<div id="main" class="p-8 flex justify-center">
 				<div class="w-10/12 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-						<h1> Work in progress. </h1>
+						<b class="text-2xl">An error ocurred while processing your request.</b>
+						<p>The resource you requested doesn't exist. (topic: <code> { topic } </code>)</p>
+						<p>Status Code: 404</p>
 					</div>
 					@common.Footer()
 				</div>
