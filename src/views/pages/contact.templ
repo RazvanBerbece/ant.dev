@@ -1,0 +1,25 @@
+package pages
+
+import "github.com/RazvanBerbece/ant.dev/src/views/common"
+
+templ Contact() {
+	<!DOCTYPE html>
+	<html lang="en">
+		// <body>
+		// 	// HTMX swaps will swap the inner div below with the responses from the server
+		// 	<div id="main-content-container">
+		// 		// all sorts of components in here
+		// 	</div>
+		// </body>
+		@common.Head("ant.dev | Contact")
+		<body>
+			@common.Navbar()
+			<div id="content-wrapper" class="p-4 flex flex-col items-center dark:text-white dark:bg-slate-800">
+				<h1 class="pb-6">My links, socials, and contact details </h1>
+				<h3><a href="https://www.linkedin.com/in/razvan-antonio-berbece-b8b405198/">Linkedin </a> </h3>
+				<h3><a href="https://github.com/RazvanBerbece">GitHub </a> </h3>
+			</div>
+			@common.Footer()
+		</body>
+	</html>
+}
