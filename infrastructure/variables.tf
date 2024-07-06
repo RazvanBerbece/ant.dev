@@ -15,3 +15,21 @@ variable "PROJECT_ZONE" {
   description = "The zone of the Google Cloud project"
   default     = "europe-west2-c"
 }
+
+variable "GCP_CREDENTIALS" {
+  type        = string
+  sensitive   = true
+  description = "Google Cloud service account credentials"
+}
+
+variable "BUDGET_ALERT_CHANNEL_EMAIL" {
+  type        = string
+  sensitive   = true
+  description = "Email to which budget usage alerts are sent to"
+}
+
+variable "BILLING_ACCOUNT_ID" {
+  type        = string
+  sensitive   = true
+  description = "The ID of the billing account associated with the Google Cloud project"
+}

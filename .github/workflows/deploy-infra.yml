@@ -1,0 +1,55 @@
+name: Deploy Terraform
+
+on:
+  push:
+    branches: [ 'main' ]
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
+      - '.gitignore'
+      - 'src/**'
+      - 'test/**'
+      - '*.go'
+      - 'go.sum'
+      - 'go.mod'
+
+  workflow_dispatch:
+
+env:
+  TF_IN_AUTOMATION: "1"
+  TF_VAR_PROJECT_ID: ${{ secrets.GC_PROJECT_ID }}
+  TF_VAR_GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+  TF_VAR_BUDGET_ALERT_CHANNEL_EMAIL: ${{ secrets.ALERT_CHANNEL_EMAIL }}
+  TF_VAR_BILLING_ACCOUNT_ID: ${{ secrets.BILLING_ACCOUNT_ID }}
+
+jobs:
+
+  continuous-integration:
+    uses: ./.github/workflows/validate-infra.yml
+    secrets: inherit
+
+  continuous-deployment:
+    needs: [continuous-integration]
+    if: needs.continuous-integration.result == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4.1.7
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3.1.1
+        with:
+          cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
+      
+      - name: Run 'terraform init'
+        working-directory: ./infrastructure
+        run: |
+          terraform init -input=false -upgrade
+
+      - name: Run 'terraform apply'
+        working-directory: ./infrastructure
+        run: |
+          terraform apply -input=false -auto-approve
+      
