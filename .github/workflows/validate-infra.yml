@@ -17,6 +17,7 @@ on:
 env:
   TF_IN_AUTOMATION: "1"
   TF_VAR_PROJECT_ID: ${{ secrets.GC_PROJECT_ID }}
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
 jobs:
 
@@ -30,7 +31,7 @@ jobs:
       - name: Setup Environment
         run: |
           mkdir keys
-          echo "${{ secrets.GC_SERVICE_ACCOUNT_BASE64 }}" | base64 --decode | jq > keys/sa.json
+          echo "${{ secrets.GC_SERVICE_ACCOUNT_BASE64 }}" | base64 --decode | jq > ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3.1.1
