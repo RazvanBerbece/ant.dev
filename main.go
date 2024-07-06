@@ -14,8 +14,8 @@ var Port = 8080
 func main() {
 
 	http.Handle("/", templ.Handler(pages.Index()))
-	http.Handle("/about", templ.Handler(pages.About()))
 	// http.Handle("/articles", templ.Handler(pages.Articles()))
+	http.Handle("/about", templ.Handler(pages.About()))
 	http.Handle("/contact", templ.Handler(pages.Contact()))
 
 	fmt.Printf("Listening on port: %d | Index: /\n", Port)
