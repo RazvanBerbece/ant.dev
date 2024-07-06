@@ -15,3 +15,9 @@ variable "PROJECT_ZONE" {
   description = "The zone of the Google Cloud project"
   default     = "europe-west2-c"
 }
+
+variable "GCP_CREDENTIALS" {
+  type        = string
+  sensitive   = true
+  description = "Google Cloud service account credentials"
+}
