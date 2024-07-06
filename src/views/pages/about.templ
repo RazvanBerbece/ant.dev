@@ -13,11 +13,15 @@ templ About() {
 		// </body>
 		@common.Head("ant.dev | About")
 		<body>
-			@common.Navbar()
-			<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-				<h1>A bit about me... </h1>
+			<div id="main" class="p-8 flex justify-center">
+				<div class="w-10/12 dark:text-white dark:bg-slate-800">
+					@common.Navbar()
+					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
+						<h1>A bit about me... </h1>
+					</div>
+					@common.Footer()
+				</div>
 			</div>
-			@common.Footer()
 		</body>
 	</html>
 }

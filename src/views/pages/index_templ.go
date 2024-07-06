@@ -39,7 +39,7 @@ func Index() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div id=\"main\" class=\"p-8 flex justify-center\"><div class=\"w-10/12 dark:text-white dark:bg-slate-800\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +47,7 @@ func Index() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 dark:text-white dark:bg-slate-800\"><div id=\"latest-articles-wrapper\" class=\"pl-4 w-6/12\"><h1 class=\"text-3xl\">My Latest Work </h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 dark:text-white dark:bg-slate-800\"><div id=\"latest-articles-wrapper\" class=\"p-6 w-6/12\"><h1 class=\"text-3xl\">My Latest Work </h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -71,7 +71,7 @@ func Index() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

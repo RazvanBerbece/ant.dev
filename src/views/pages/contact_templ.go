@@ -36,7 +36,7 @@ func Contact() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div id=\"main\" class=\"p-8 flex justify-center\"><div class=\"w-10/12 dark:text-white dark:bg-slate-800\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -44,7 +44,7 @@ func Contact() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 flex flex-col items-center dark:text-white dark:bg-slate-800\"><h1 class=\"pb-6\">My links, socials, and contact details </h1><h3><a href=\"https://www.linkedin.com/in/razvan-antonio-berbece-b8b405198/\">Linkedin </a></h3><h3><a href=\"https://github.com/RazvanBerbece\">GitHub </a></h3></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"content-wrapper\" class=\"p-4 flex flex-col items-center dark:text-white dark:bg-slate-800\"><h1 class=\"pb-6\">My links, socials, and contact details </h1><div id=\"social-link-wrapper\" class=\"flex mt-2 hover:underline\"><img alt=\"linkedin logo\" src=\"https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png\" width=\"25\" height=\"25\"> <a href=\"https://www.linkedin.com/in/razvan-antonio-berbece-b8b405198/\" class=\"pl-2\">Linkedin</a></div><div id=\"social-link-wrapper\" class=\"flex mt-2 hover:underline\"><img alt=\"github logo\" src=\"https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png\" width=\"25\" height=\"25\"> <a href=\"https://github.com/RazvanBerbece\" class=\"pl-2\">GitHub</a></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -52,7 +52,7 @@ func Contact() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

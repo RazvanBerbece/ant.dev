@@ -28,7 +28,7 @@ func ArticleThumbnail(id int, articleName string, previewText string, createdAt 
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mt-6 dark:bg-slate-800 hover:bg-gray-500\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mt-6 dark:bg-slate-800 hover:bg-gray-500 cursor-pointer\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

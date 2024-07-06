@@ -26,7 +26,7 @@ func Footer() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<footer class=\"border-t-4 text-center p-4 dark:text-white dark:bg-slate-800\"><div class=\"flex justify-around items-center flex-wrap\"><div class=\"mt-4 sm:mt-0 sm:mr-4\">&copy; 2024 Antonio B. All rights reserved.</div><div class=\"flex flex-col items-center\"><a href=\"/\" class=\"mb-2 sm:mb-0\">Home</a> <a href=\"/articles\" class=\"mb-2 sm:mb-0\">Articles</a> <a href=\"/about\" class=\"mb-2 sm:mb-0\">About Me</a> <a href=\"contact\" class=\"mb-2 sm:mb-0\">Contact Me</a></div></div></footer>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<hr><footer class=\"text-center p-4 dark:text-white dark:bg-slate-800\"><div class=\"flex justify-around items-center flex-wrap\"><div class=\"mt-4 sm:mt-0 sm:mr-4\">&copy; 2024 Antonio B. All rights reserved.</div><div class=\"flex flex-col items-center\"><a href=\"/\" class=\"mb-2 sm:mb-0\">Home</a> <a href=\"/articles\" class=\"mb-2 sm:mb-0\">Articles</a> <a href=\"/about\" class=\"mb-2 sm:mb-0\">About Me</a> <a href=\"contact\" class=\"mb-2 sm:mb-0\">Contact Me</a></div></div></footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
