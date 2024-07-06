@@ -36,22 +36,26 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3.1.1
         with:
-            cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
+          cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
 
       - name: Run 'terraform fmt'
+        working-directory: ./infrastructure
         id: fmt
         run: terraform fmt -check -recursive
       
       - name: Run 'terraform init'
+        working-directory: ./infrastructure
         id: init
         run: |
           terraform init -upgrade
        
       - name: Run 'terraform validate'
+        working-directory: ./infrastructure
         id: validate
         run: terraform validate -no-color
 
       - name: Run 'terraform plan'
+        working-directory: ./infrastructure
         id: planStep
         run: |
           terraform plan -input=false
