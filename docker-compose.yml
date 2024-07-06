@@ -1,0 +1,10 @@
+services:
+
+  antdev-blog:
+    container_name: antdev-webapp
+    environment:
+      PORT: 8080
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"

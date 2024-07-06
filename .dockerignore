@@ -1,0 +1,17 @@
+.github/
+.gitignore
+.gitmodules
+.git/
+
+.dockerignore
+Dockerfile
+
+test/
+
+build/
+*.log
+
+.DS_Store
+*.md
+
+infrastructure/
