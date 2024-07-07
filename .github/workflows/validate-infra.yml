@@ -12,6 +12,9 @@ on:
       - '*.go'
       - 'go.sum'
       - 'go.mod'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - '.dockerignore'
   workflow_call:
 
 env:
