@@ -4,6 +4,7 @@ services:
     container_name: antdev-webapp
     environment:
       PORT: 8080
+      USE_LOCAL_STORAGE: 1
     build:
       dockerfile: Dockerfile
     ports:

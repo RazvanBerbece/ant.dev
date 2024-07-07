@@ -17,6 +17,7 @@ env:
   GO_VERSION: 1.22.4
   SERVICE_NAME: "antdev-webapp"
   REGION: europe-west2
+  USE_LOCAL_STORAGE: "1"
 
 jobs:
 
@@ -90,7 +91,8 @@ jobs:
               --max-instances=1 \
               --cpu=1 \
               --no-use-http2 \
-              --no-allow-unauthenticated
+              --no-allow-unauthenticated \
+              --set-env-vars USE_LOCAL_STORAGE="1"
             
       # - name: Ping homepage
       #   run: 'curl "${{ steps.deploy.outputs.url }}"'

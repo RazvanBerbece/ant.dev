@@ -14,20 +14,26 @@ import (
 	"github.com/a-h/templ"
 )
 
-// Configuration
+// Environment Configuration
 var Port = os.Getenv("PORT")
+var UsesLocalStorage = os.Getenv("USE_LOCAL_STORAGE")
 
 // Infrastructure
 var Logger = slog.Default()
 
 // Services
-var CommentsService = commentsService.NewLocalCommentsService(publishings.PublishedArticles, Logger)
+var CommentsService commentsService.CommentsService
 
 func main() {
 
 	// Runtime injections and swaps
-	// e.g replace the CommentsService local strategy with a cloud one when in Cloud Run
-	// TODO
+	// i.e use Cloud dependencies when on Cloud Run,
+	// and locals when running locally
+	if UsesLocalStorage != "1" {
+		CommentsService = commentsService.NewCloudCommentsService(Logger)
+	} else {
+		CommentsService = commentsService.NewLocalCommentsService(publishings.PublishedArticles, Logger)
+	}
 
 	// Simple page handlers
 	http.Handle("/", templ.Handler(pages.Index()))
