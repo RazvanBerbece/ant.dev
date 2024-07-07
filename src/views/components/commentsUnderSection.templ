@@ -3,7 +3,11 @@ package components
 import "github.com/RazvanBerbece/ant.dev/src/domain"
 
 templ CommentsUnderSection(comments []domain.ArticleComment) {
-	for idx, cmt := range comments {
-		@ArticleComment(idx, cmt)
+	if len(comments) == 0 {
+		<h2 class="text-lg italic"> There are no comments for this article yet. Be the first to leave one ! </h2>
+	} else {
+		for idx, cmt := range comments {
+			@ArticleComment(idx, cmt)
+		}
 	}
 }

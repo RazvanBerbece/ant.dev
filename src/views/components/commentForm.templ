@@ -11,13 +11,13 @@ templ CommentForm(articleId int) {
 			hx-target="#comment-submit-op-status-wrapper"
 			placeholder="Submitting..."
 			onsubmit="onSubmit()"
-			class="w-96"
+			class="w-full md:w-96"
 		>
 			<textarea
 				name="comment_author"
 				cols="20"
 				rows="1"
-				class="w-full border mb-2 text-black"
+				class="w-full border mb-2 text-black resize-none"
 				placeholder="Your author identifier goes here"
 				required
 			></textarea>
@@ -29,7 +29,7 @@ templ CommentForm(articleId int) {
 				placeholder="and your comment here..."
 				required
 			></textarea>
-			<button class="py-1 w-1/4 h-8 dark:text-white dark:bg-gray-500">
+			<button class="py-1 w-2/6 min-w-full h-8 dark:text-white dark:bg-gray-500">
 				Submit
 			</button>
 		</form>
