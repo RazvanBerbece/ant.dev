@@ -2,6 +2,8 @@
 
 My approach to a quirky old-school tech blog. I'll be using this to host my articles on in the future :')
 
+Published at: https://antdev-webapp-elba5bz5xq-nw.a.run.app/ (TODO: Get a proper domain)
+
 # Buzzwords
 
 * Go
