@@ -85,6 +85,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           image: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }}
+          region: ${{ env.REGION }}
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'

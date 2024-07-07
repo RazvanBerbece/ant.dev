@@ -26,6 +26,14 @@ resource "google_service_account_iam_binding" "github-webapp-manager-service-acc
   ]
 }
 
+resource "google_service_account_iam_binding" "github-webapp-manager-service-account-owner-iam" {
+  service_account_id = google_service_account.github-webapp-manager-service-account.name
+  role               = "roles/roles/run.admin"
+  members = [
+    "serviceAccount:${google_service_account.github-webapp-manager-service-account.email}",
+  ]
+}
+
 module "gh_oidc" {
   source            = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
   version           = "v3.1.2"
