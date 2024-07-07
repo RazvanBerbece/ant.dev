@@ -31,6 +31,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.7
 
+      - name: Generate next release number
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.DEV_BOT_TOKEN }}
+          dry_run: true
+
+      - name: Generate SHA output
+        id: vars
+        run: echo "GITHUB_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v2'
@@ -48,12 +59,29 @@ jobs:
           username: 'oauth2accesstoken'
           password: '${{ steps.auth.outputs.access_token }}'
 
+      - name: Build, tag and push container
+        id: build-image
+        uses: docker/build-push-action@v3
+        with:
+          context: "."
+          push: true 
+          tags: |
+              ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }}
+
       - id: 'deploy'
-        uses: 'google-github-actions/deploy-cloudrun@v2.6.0'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
           service: ${{ env.SERVICE_NAME }}
-          image: 'gcr.io/cloudrun/hello'
+          image: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }}
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
+
+      - name: Create a new GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.DEV_BOT_TOKEN }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
       
