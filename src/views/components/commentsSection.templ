@@ -1,0 +1,14 @@
+package components
+
+import "fmt"
+
+templ CommentsSection(articleId int) {
+	<hr/>
+	<div id="comments-section-wrapper" class="mt-6">
+		<h2 class="pb-4 text-2xl font-bold">Leave a comment </h2>
+		@CommentForm(articleId)
+		<div hx-get={ fmt.Sprintf("/comments?articleId=%d", articleId) } hx-trigger="load">
+			loading comments...
+		</div>
+	</div>
+}

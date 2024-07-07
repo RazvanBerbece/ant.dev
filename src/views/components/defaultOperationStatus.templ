@@ -1,0 +1,9 @@
+package components
+
+import "fmt"
+
+templ DefaultOperationStatus(msg string, code int) {
+	<div>
+		{ msg } (status: { fmt.Sprintf("%d", code) })
+	</div>
+}

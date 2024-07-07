@@ -1,0 +1,9 @@
+package components
+
+import "github.com/RazvanBerbece/ant.dev/src/domain"
+
+templ CommentsUnderSection(comments []domain.ArticleComment) {
+	for idx, cmt := range comments {
+		@ArticleComment(idx, cmt)
+	}
+}

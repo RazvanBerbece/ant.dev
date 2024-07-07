@@ -1,4 +1,4 @@
-package publishings
+package publishingTemplates
 
 import (
 	"github.com/RazvanBerbece/ant.dev/src/domain"
@@ -9,7 +9,7 @@ import (
 
 // For each article we'd want to retrieve their respective comments
 // note: this can probably benefit from an interface which targets different storage mediums (i.e cloud, local, etc.)
-var SampleComments_1 = []domain.ArticleComment{
+var SampleComments = []domain.ArticleComment{
 	{
 		Author:    "Mike",
 		Content:   "Sample Content 1",
@@ -30,13 +30,13 @@ var SampleComments_1 = []domain.ArticleComment{
 templ Article__1BrcCsharp(id int, createdAt int64) {
 	<!DOCTYPE html>
 	<html lang="en">
-		@common.Head("ant.dev | 1BRC in C#")
+		@common.Head("ant.dev | Default Article Template")
 		<body>
 			<div id="main" class="p-8 flex justify-center">
 				<div class="w-10/12 bg-blue-100 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-12 dark:text-white dark:bg-slate-800">
-						<b class="text-3xl">1BRC: My Not-Very-Sophisticated C# Attempt </b>
+						<b class="text-3xl">My Sample Article </b>
 						<div class="mt-4">
 							<h1>Work in progress. </h1>
 						</div>

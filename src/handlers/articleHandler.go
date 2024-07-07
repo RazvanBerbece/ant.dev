@@ -5,11 +5,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	"github.com/RazvanBerbece/ant.dev/src/services/articlesService"
 	errPages "github.com/RazvanBerbece/ant.dev/src/views/pages/err"
 	pages "github.com/RazvanBerbece/ant.dev/src/views/pages/main"
 	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
-	"github.com/a-h/templ"
 )
 
 func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +30,7 @@ func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
 			}
 
 			// Get the article component by ID from local memory
-			articleExists, articleComponent := TryGetArticleFromMemory(idAsInt)
+			articleExists, articleComponent := articlesService.TryGetArticleComponentFromMemory(publishings.PublishedArticles, idAsInt)
 
 			if !articleExists {
 				// Error - Non-existent article
@@ -46,30 +45,4 @@ func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
 			errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an empty ID: %s%s?id=", r.Host, r.URL.Path), http.StatusNotFound).Render(r.Context(), w)
 		}
 	}
-}
-
-func TryGetArticleFromMemory(id int) (bool, templ.Component) {
-
-	exists, article := ArticleWithIdExists(id, publishings.PublishedArticles)
-
-	if !exists {
-		return false, nil
-	}
-
-	return true, article.Component
-
-}
-
-func ArticleWithIdExists(id int, slice []domain.Article) (bool, *domain.Article) {
-	if len(slice) == 0 {
-		return false, nil
-	}
-
-	for _, article := range slice {
-		if article.Id == id {
-			return true, &article
-		}
-	}
-
-	return false, nil
 }

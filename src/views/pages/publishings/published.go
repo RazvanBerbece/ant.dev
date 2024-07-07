@@ -22,7 +22,8 @@ var PublishedArticles = []domain.Article{
 		CreatedAt: 1720285638,
 		TextPreview: `I'm generally not a wizard when it comes to squeezing every little ms of performance out of my code. 
 		With that in mind, I went on an odyssey to create a potential solution to the 1 Billion Row Challenge using C# and .NET.`,
-		Component: Article__1BrcCsharp(1720285638),
+		Component: Article__1BrcCsharp(1, 1720285638),
+		Comments:  []domain.ArticleComment{},
 	},
 	// Article 2
 	// etc...
