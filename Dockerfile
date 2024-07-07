@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-# Base Image
-FROM golang:latest
+# Build step
+FROM golang:latest as build
 
 WORKDIR /app
 
@@ -13,4 +13,9 @@ COPY . ./
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o build/ant.dev/main main.go 
 
-CMD sh -c "./build/ant.dev/main"
+# Entrypoint step
+FROM gcr.io/distroless/base
+
+COPY --from=build /app/. /
+
+ENTRYPOINT ["./build/ant.dev/main"]
