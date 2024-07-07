@@ -79,15 +79,6 @@ jobs:
           tags: |
               ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }}
 
-      # - id: 'deploy'
-      #   uses: 'google-github-actions/deploy-cloudrun@v2'
-      #   with:
-      #     service: ${{ env.SERVICE_NAME }}
-      #     image: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }}
-      #     region: ${{ env.REGION }}
-      #   #   env_vars: |-
-      #   #     PORT=8080 by default
-
       - name: Deploy updated image to Google Cloud Run
         id: 'deploy'
         run: |
@@ -100,9 +91,9 @@ jobs:
               --cpu=1 \
               --use-http2 \
               --no-allow-unauthenticated
-
-      - name: 'Use output'
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
+            
+      # - name: Ping homepage
+      #   run: 'curl "${{ steps.deploy.outputs.url }}"'
 
       - name: Create a new GitHub release
         uses: ncipollo/release-action@v1
