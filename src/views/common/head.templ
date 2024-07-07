@@ -11,6 +11,17 @@ templ Head(pageTitle string) {
 			* {
   				font-family: 'Open Sans', Optima, sans-serif;
 			}
+			:root {
+				--bg-color: white;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--bg-color: #525275;
+				}
+			}
+			body {
+				background-color: var(--bg-color);
+			}
 		</style>
 	</head>
 }
