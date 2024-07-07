@@ -1,8 +1,8 @@
 package errPages
 
 import (
-	"github.com/RazvanBerbece/ant.dev/src/views/common"
 	"fmt"
+	"github.com/RazvanBerbece/ant.dev/src/views/common"
 )
 
 templ ErrGeneric(msg string, statusCode int) {
@@ -15,7 +15,7 @@ templ ErrGeneric(msg string, statusCode int) {
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
 						<b class="text-2xl">An error ocurred while processing your request.</b>
-						<p>Error message: <code> { msg } </code></p>
+						<p>Error message: <code>{ msg } </code></p>
 						<p>Status Code: { fmt.Sprintf("%d", statusCode) }</p>
 					</div>
 					@common.Footer()

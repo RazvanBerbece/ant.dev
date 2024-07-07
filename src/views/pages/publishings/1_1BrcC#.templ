@@ -1,8 +1,8 @@
 package publishings
 
 import (
-	"time"
 	"github.com/RazvanBerbece/ant.dev/src/views/common"
+	"time"
 )
 
 templ Article__1BrcCsharp(createdAt int64) {
@@ -20,11 +20,11 @@ templ Article__1BrcCsharp(createdAt int64) {
 				<div class="w-10/12 bg-blue-100 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-12 dark:text-white dark:bg-slate-800">
-						<b class="text-3xl"> 1BRC: My Not-Very-Sophisticated C# Attempt </b>
+						<b class="text-3xl">1BRC: My Not-Very-Sophisticated C# Attempt </b>
 						<div class="mt-4">
-							<h1> Work in progress. </h1>
+							<h1>Work in progress. </h1>
 						</div>
-						<p class="mt-4 italic"> Created on: { time.Unix(createdAt, 0).UTC().Format("January 2, 2006") } </p>
+						<p class="mt-4 italic">Created on: { time.Unix(createdAt, 0).UTC().Format("January 2, 2006") } </p>
 					</div>
 					@common.Footer()
 				</div>
