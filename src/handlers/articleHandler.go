@@ -25,7 +25,8 @@ func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
 			idAsInt, err := strconv.Atoi(articleId)
 			if err != nil {
 				// Invalid ID for an Article
-				errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an invalid ID: %s%s?id=%s", r.Host, r.URL.Path, articleId), 400).Render(r.Context(), w)
+				w.WriteHeader(http.StatusBadRequest)
+				errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an invalid ID: %s%s?id=%s", r.Host, r.URL.Path, articleId), http.StatusBadRequest).Render(r.Context(), w)
 				return
 			}
 
@@ -34,13 +35,15 @@ func HandleArticleRequest(w http.ResponseWriter, r *http.Request) {
 
 			if !articleExists {
 				// Error - Non-existent article
+				w.WriteHeader(http.StatusNotFound)
 				errPages.ErrNotFound(fmt.Sprintf("Article with ID: %s", articleId)).Render(r.Context(), w)
 			} else {
 				articleComponent.Render(r.Context(), w)
 			}
 		} else {
 			// Error - Article with empty ID
-			errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an empty ID: %s%s?id=", r.Host, r.URL.Path), 400).Render(r.Context(), w)
+			w.WriteHeader(http.StatusNotFound)
+			errPages.ErrGeneric(fmt.Sprintf("Can't request an article with an empty ID: %s%s?id=", r.Host, r.URL.Path), http.StatusNotFound).Render(r.Context(), w)
 		}
 	}
 }
