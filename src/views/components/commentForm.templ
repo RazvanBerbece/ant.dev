@@ -29,12 +29,12 @@ templ CommentForm(articleId int) {
 				placeholder="and your comment here..."
 				required
 			></textarea>
-			<button class="py-1 w-2/6 h-8 dark:text-white dark:bg-gray-500">
+			<button class="py-1 w-2/6 h-8 bg-gray-400 dark:text-white dark:bg-gray-500">
 				Submit
 			</button>
 		</form>
-		<div id="comment-submit-op-status-wrapper" class="pb-6"></div>
-		<hr/>
+		<div id="comment-submit-op-status-wrapper" class="pb-8"></div>
+		<hr class="border-gray-400 dark:border-white"/>
 	</div>
 	<script>
         function onSubmit() {

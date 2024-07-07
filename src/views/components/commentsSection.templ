@@ -3,10 +3,11 @@ package components
 import "fmt"
 
 templ CommentsSection(articleId int) {
-	<hr/>
+	<hr class="border-gray-400 dark:border-white"/>
 	<div id="comments-section-wrapper" class="mt-6">
 		<h2 class="pb-4 text-2xl font-bold">Leave a comment </h2>
 		@CommentForm(articleId)
+		<h2 class="pb-6 text-2xl font-bold">Comments </h2>
 		<div hx-get={ fmt.Sprintf("/comments?articleId=%d", articleId) } hx-trigger="load">
 			loading comments...
 		</div>
