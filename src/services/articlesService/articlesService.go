@@ -2,23 +2,10 @@ package articlesService
 
 import (
 	domain "github.com/RazvanBerbece/ant.dev/src/domain/models"
-	"github.com/a-h/templ"
 )
 
-// Retrieves an article Templ component from a local list of Articles.
-// Usually the local variable is the runtime-available published articles slice.
-func TryGetArticleComponentFromLocal(articles []domain.Article, id int) (bool, templ.Component) {
-
-	if len(articles) == 0 {
-		return false, nil
-	}
-
-	for _, article := range articles {
-		if article.Id == id {
-			return true, article.Component
-		}
-	}
-
-	return false, nil
-
+type ArticlesService interface {
+	GetArticle(id int) *domain.Article
+	GetArticles() []domain.Article
+	GetRecentArticles(n int) []domain.Article
 }

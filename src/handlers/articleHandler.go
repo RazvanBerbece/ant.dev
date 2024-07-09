@@ -5,13 +5,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/RazvanBerbece/ant.dev/src/domain/models"
 	"github.com/RazvanBerbece/ant.dev/src/services/articlesService"
 	errPages "github.com/RazvanBerbece/ant.dev/src/views/pages/err"
 	pages "github.com/RazvanBerbece/ant.dev/src/views/pages/main"
 )
 
-func HandleArticleRequest(publishedArticles []models.Article) func(w http.ResponseWriter, r *http.Request) {
+func HandleArticleRequest(articlesService articlesService.ArticlesService) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if len(r.URL.Query()) == 0 {
 			// Index page for Articles
@@ -31,14 +30,14 @@ func HandleArticleRequest(publishedArticles []models.Article) func(w http.Respon
 				}
 
 				// Get the article component by ID from local memory
-				articleExists, articleComponent := articlesService.TryGetArticleComponentFromLocal(publishedArticles, articleIdAsInt)
+				article := articlesService.GetArticle(articleIdAsInt)
 
-				if !articleExists {
+				if article == nil {
 					// Error - Non-existent article
 					w.WriteHeader(http.StatusNotFound)
-					errPages.ErrNotFound(fmt.Sprintf("Article with ID: %s", articleId)).Render(r.Context(), w)
+					errPages.ErrNotFound(fmt.Sprintf("Article with ID: %d", articleIdAsInt)).Render(r.Context(), w)
 				} else {
-					articleComponent.Render(r.Context(), w)
+					article.Component.Render(r.Context(), w)
 				}
 			} else {
 				// Error - Article with empty ID
