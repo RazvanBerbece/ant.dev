@@ -1,5 +1,7 @@
 # Cloud Infrastructure for `ant.dev`
 
-The webapp will be deployed on a Google Cloud Run instance (for now?), because it offers ~100K free requests a month.
+The containerised webapp is deployed to Google Cloud Run, mainly because it offers ~100K free requests and plenty of free CPU time a month. 
 
-The infrastructure is managed through Terraform and GitHub Actions.
+Most of the Google Cloud infrastructure (service accounts, artifact registry, role assignments and billing stuff) is managed through Terraform and deployed automatically via GitHub Actions.
+
+The container app is managed and deployed by the `gcloud run deploy` command which manages both the creation of the container resource on-Cloud and the update of the revision with the new code. This workflow is automated via GitHub Actions.

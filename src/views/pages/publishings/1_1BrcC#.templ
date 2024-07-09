@@ -1,31 +1,10 @@
 package publishings
 
 import (
-	"github.com/RazvanBerbece/ant.dev/src/domain"
 	"github.com/RazvanBerbece/ant.dev/src/views/common"
 	"github.com/RazvanBerbece/ant.dev/src/views/components"
 	"time"
 )
-
-// For each article we'd want to retrieve their respective comments
-// note: this can probably benefit from an interface which targets different storage mediums (i.e cloud, local, etc.)
-var SampleComments_1 = []domain.ArticleComment{
-	{
-		Author:    "Mike",
-		Content:   "Sample Content 1",
-		CreatedAt: 1720285638,
-	},
-	{
-		Author:    "Ron",
-		Content:   "Sample Content 2",
-		CreatedAt: 1720285638,
-	},
-	{
-		Author:    "Alicia",
-		Content:   "Sample Content 3",
-		CreatedAt: 1720285638,
-	},
-}
 
 templ Article__1BrcCsharp(id int, createdAt int64) {
 	<!DOCTYPE html>

@@ -41,8 +41,8 @@ func main() {
 	http.Handle("/contact", templ.Handler(pages.Contact()))
 
 	// Complex page handlers
-	http.HandleFunc("/articles", handlers.HandleArticleRequest)                   // /articles, /articles?id=
-	http.HandleFunc("/comments", handlers.HandleCommentsRequest(CommentsService)) // GET /comments?articleId=, POST Form-Data /comments?articleId=
+	http.HandleFunc("/articles", handlers.HandleArticleRequest(publishings.PublishedArticles)) // /articles, /articles?id=
+	http.HandleFunc("/comments", handlers.HandleCommentsRequest(CommentsService))              // GET /comments?articleId=, POST Form-Data /comments?articleId=
 
 	fmt.Printf("Listening on port: %s | Index: /\n", Port)
 

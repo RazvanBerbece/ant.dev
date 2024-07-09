@@ -4,6 +4,8 @@ My approach to a quirky old-school tech blog. I'll be using this to host my arti
 
 Published at: https://antdev-webapp-elba5bz5xq-nw.a.run.app/ (TODO: Get a proper domain)
 
+Note: Public unauthenticated traffic is disabled on the URL above in order to minimise costs and risks while the blog is still under development.
+
 # Buzzwords
 
 * Go

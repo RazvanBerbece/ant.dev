@@ -5,8 +5,9 @@ import (
 	"github.com/a-h/templ"
 )
 
-// Retrieves an article Templ component from the runtime-available published articles.
-func TryGetArticleComponentFromMemory(articles []domain.Article, id int) (bool, templ.Component) {
+// Retrieves an article Templ component from a local list of Articles.
+// Usually the local variable is the runtime-available published articles slice.
+func TryGetArticleComponentFromLocal(articles []domain.Article, id int) (bool, templ.Component) {
 
 	if len(articles) == 0 {
 		return false, nil
@@ -15,23 +16,6 @@ func TryGetArticleComponentFromMemory(articles []domain.Article, id int) (bool, 
 	for _, article := range articles {
 		if article.Id == id {
 			return true, article.Component
-		}
-	}
-
-	return false, nil
-
-}
-
-// Retrieves an article from the runtime-available published articles.
-func TryGetArticleFromMemory(articles []domain.Article, id int) (bool, *domain.Article) {
-
-	if len(articles) == 0 {
-		return false, nil
-	}
-
-	for _, article := range articles {
-		if article.Id == id {
-			return true, &article
 		}
 	}
 
