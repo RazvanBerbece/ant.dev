@@ -1,0 +1,32 @@
+package components
+
+import (
+	"fmt"
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
+)
+
+templ ArticleArchiveThumbnail(id int, articleName string, createdAt string, thumbnailPicUrl string, thumbnailPicAlt string, tags []models.ArticleTag) {
+	<div class="flex items-center mt-6">
+		<a href={ templ.URL(fmt.Sprintf("/articles?id=%d", id)) } class="text-current">
+			<div class="flex flex-col items-center cursor-pointer hover:bg-blue-200 dark:bg-slate-800 dark:hover:bg-gray-500">
+				<p class="text-xl font-semibold border-b">{ articleName } </p>
+				<div class="flex justify-end w-full">
+					<span class="inline-block mt-2 px-2 py-1 text-sm font-semibold text-black bg-gray-400 rounded dark:text-gray-200 dark:bg-gray-600">{ createdAt } </span>
+				</div>
+				<div id="tags-wrapper" class="w-full flex flex-row justify-end">
+					for _, tag := range tags[0:len(tags)-1] {
+						<span class={ fmt.Sprintf("inline-block mr-1 mt-2 px-2 py-1 text-sm font-semibold rounded %s", tag.GetTailwindStyleString()) }>{ tag.Value } </span>
+					}
+					<span class={ fmt.Sprintf("inline-block mr-1 mt-2 px-2 py-1 text-sm font-semibold rounded %s", tags[len(tags)-1].GetTailwindStyleString()) }>{ tags[len(tags)-1].Value } </span>
+				</div>
+			</div>
+		</a>
+		<img
+			alt={ thumbnailPicAlt }
+			src={ thumbnailPicUrl }
+			width="150"
+			height="150"
+			class="ml-3"
+		/>
+	</div>
+}

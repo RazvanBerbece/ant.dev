@@ -1,8 +1,13 @@
 package pages
 
-import "github.com/RazvanBerbece/ant.dev/src/views/common"
+import (
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
+	"github.com/RazvanBerbece/ant.dev/src/views/common"
+	"github.com/RazvanBerbece/ant.dev/src/views/components"
+	"time"
+)
 
-templ Articles() {
+templ Articles(publishedArticles []models.Article) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@common.Head("ant.dev | Articles")
@@ -11,7 +16,18 @@ templ Articles() {
 				<div class="w-10/12 bg-blue-100 dark:text-white dark:bg-slate-800">
 					@common.Navbar()
 					<div id="content-wrapper" class="p-4 dark:text-white dark:bg-slate-800">
-						<h1>Articles Page - Work in progress. </h1>
+						<p class="pl-6 pt-6 pr-6 text-3xl">Publishings </p>
+						<div id="articles-archive-wrapper" class="pt-4 w-full flex flex-col items-center text-center">
+							for _, article := range publishedArticles {
+								@components.ArticleArchiveThumbnail(
+									article.Id,
+									article.Title,
+									time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"),
+									article.ThumbnailImageUrl,
+									article.ThumbnailImageAlt,
+									article.Tags)
+							}
+						</div>
 					</div>
 					@common.Footer()
 				</div>

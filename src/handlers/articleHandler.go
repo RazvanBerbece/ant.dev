@@ -14,7 +14,7 @@ func HandleArticleRequest(articlesService articlesService.ArticlesService) func(
 	return func(w http.ResponseWriter, r *http.Request) {
 		if len(r.URL.Query()) == 0 {
 			// Index page for Articles
-			pages.Articles().Render(r.Context(), w)
+			pages.Articles(articlesService.GetArticles()).Render(r.Context(), w)
 		} else {
 			// A specific article is requested by ID
 			articleId := r.URL.Query().Get("id")
