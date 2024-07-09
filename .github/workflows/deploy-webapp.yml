@@ -17,7 +17,8 @@ env:
   GO_VERSION: 1.22.4
   SERVICE_NAME: "antdev-webapp"
   REGION: europe-west2
-  USE_LOCAL_STORAGE: "1"
+  # Golang app env variables
+  USE_LOCAL_STORAGE_COMMENTS: "1"
 
 jobs:
 
@@ -92,7 +93,7 @@ jobs:
               --cpu=1 \
               --no-use-http2 \
               --no-allow-unauthenticated \
-              --set-env-vars USE_LOCAL_STORAGE="1"
+              --set-env-vars USE_LOCAL_STORAGE="${{ env.USE_LOCAL_STORAGE_COMMENTS }}"
             
       # - name: Ping homepage
       #   run: 'curl "${{ steps.deploy.outputs.url }}"'

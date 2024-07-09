@@ -17,7 +17,7 @@ import (
 
 // Environment Configuration
 var Port = os.Getenv("PORT")
-var UseLocalStorageForComments = os.Getenv("USE_LOCAL_STORAGE")
+var UseLocalStorageForComments = os.Getenv("USE_LOCAL_STORAGE_COMMENTS")
 
 // Infrastructure
 var Logger = slog.Default()
