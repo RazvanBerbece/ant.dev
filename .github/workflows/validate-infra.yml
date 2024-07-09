@@ -9,6 +9,7 @@ on:
       - '.gitignore'
       - 'src/**'
       - 'test/**'
+      - 'publish/**'
       - '*.go'
       - 'go.sum'
       - 'go.mod'

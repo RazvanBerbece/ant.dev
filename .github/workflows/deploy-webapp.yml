@@ -10,6 +10,7 @@ on:
       - '.gitignore'
       - 'infrastructure/**'
       - 'test/**'
+      - 'docker-compose.yml'
 
   workflow_dispatch:
 
