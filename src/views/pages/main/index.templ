@@ -1,15 +1,15 @@
 package pages
 
 import (
+	"github.com/RazvanBerbece/ant.dev/src/domain"
 	"github.com/RazvanBerbece/ant.dev/src/views/common"
 	"github.com/RazvanBerbece/ant.dev/src/views/components"
-	"github.com/RazvanBerbece/ant.dev/src/views/pages/publishings"
 	"time"
 )
 
 var RecentArticlesCountParam = 3 // display the first N most recent articles
 
-templ Index() {
+templ Index(recentArticles []domain.Article) {
 	<!DOCTYPE html>
 	<html lang="en">
 		@common.Head("ant.dev | Home")
@@ -21,7 +21,7 @@ templ Index() {
 						<div id="latest-articles-wrapper" class="p-6 w-6/12">
 							<p class="pb-1 text-3xl">My Latest Work </p>
 							// Get last RecentArticlesCountParam articles published and display them
-							for _, article := range publishings.PublishedArticles {
+							for _, article := range recentArticles {
 								@components.ArticleThumbnail(article.Id, article.Title, article.TextPreview, time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"))
 							}
 						</div>
