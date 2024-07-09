@@ -1,4 +1,4 @@
-package domain
+package models
 
 import "github.com/a-h/templ"
 
@@ -8,5 +8,5 @@ type Article struct {
 	Component   templ.Component  // the Templ component rendered for an article model
 	CreatedAt   int64            // UNIX timestamp for when the article was created
 	TextPreview string           // a preview of the content of the article
-	Comments    []ArticleComment // locally-stored list of comments associated with an article
+	Comments    []ArticleComment // locally-stored list of comments associated with an article (TODO: redundant once cloud storage is supported)
 }

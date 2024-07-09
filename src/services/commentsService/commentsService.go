@@ -1,8 +1,8 @@
 package commentsService
 
-import "github.com/RazvanBerbece/ant.dev/src/domain"
+import "github.com/RazvanBerbece/ant.dev/src/domain/models"
 
 type CommentsService interface {
-	Get(articleId int) ([]domain.ArticleComment, error)
-	Store(comment domain.ArticleComment) error
+	Get(articleId int) ([]models.ArticleComment, error)
+	Store(comment models.ArticleComment) error
 }

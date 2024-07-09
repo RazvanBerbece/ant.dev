@@ -1,8 +1,8 @@
 package components
 
-import "github.com/RazvanBerbece/ant.dev/src/domain"
+import "github.com/RazvanBerbece/ant.dev/src/domain/models"
 
-templ CommentsUnderSection(comments []domain.ArticleComment) {
+templ CommentsUnderSection(comments []models.ArticleComment) {
 	if len(comments) == 0 {
 		<h2 class="text-lg italic"> There are no comments for this article yet. Be the first to leave one ! </h2>
 	} else {

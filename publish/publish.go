@@ -2,7 +2,7 @@ package publish
 
 import (
 	"github.com/RazvanBerbece/ant.dev/publish/articles"
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
 )
 
 //
@@ -15,7 +15,7 @@ import (
 // 		 then the server will respond with a 404 Not Found.
 //
 
-var PublishedArticles = []domain.Article{
+var PublishedArticles = []models.Article{
 	// Article 1
 	{
 		Id:        1,
@@ -24,7 +24,7 @@ var PublishedArticles = []domain.Article{
 		TextPreview: `I'm generally not a wizard when it comes to squeezing every little ms of performance out of my code. 
 		With that in mind, I went on an odyssey to create a potential solution to the 1 Billion Row Challenge using C# and .NET.`,
 		Component: articles.Article__1BrcCsharp(1, 1720285638),
-		Comments:  []domain.ArticleComment{},
+		Comments:  []models.ArticleComment{},
 	},
 	// Article 2
 	// etc...

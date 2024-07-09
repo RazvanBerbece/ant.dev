@@ -2,11 +2,11 @@ package components
 
 import (
 	"fmt"
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
 	"time"
 )
 
-templ ArticleComment(idx int, cmt domain.ArticleComment) {
+templ ArticleComment(idx int, cmt models.ArticleComment) {
 	<div id={ fmt.Sprintf("comment-%d", idx+1) } class="pb-10">
 		<h3 class="text-xl font-bold">{ cmt.Author } </h3>
 		<i>{ time.Unix(cmt.CreatedAt, 0).UTC().Format("January 2, 2006") } </i>

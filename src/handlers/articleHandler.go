@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
 	"github.com/RazvanBerbece/ant.dev/src/services/articlesService"
 	errPages "github.com/RazvanBerbece/ant.dev/src/views/pages/err"
 	pages "github.com/RazvanBerbece/ant.dev/src/views/pages/main"
 )
 
-func HandleArticleRequest(publishedArticles []domain.Article) func(w http.ResponseWriter, r *http.Request) {
+func HandleArticleRequest(publishedArticles []models.Article) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if len(r.URL.Query()) == 0 {
 			// Index page for Articles

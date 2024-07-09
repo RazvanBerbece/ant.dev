@@ -1,7 +1,7 @@
 package articlesService
 
 import (
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	domain "github.com/RazvanBerbece/ant.dev/src/domain/models"
 	"github.com/a-h/templ"
 )
 

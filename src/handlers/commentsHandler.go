@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/RazvanBerbece/ant.dev/src/domain"
 	"github.com/RazvanBerbece/ant.dev/src/domain/contracts"
+	domain "github.com/RazvanBerbece/ant.dev/src/domain/models"
 	"github.com/RazvanBerbece/ant.dev/src/services/commentsService"
 	"github.com/RazvanBerbece/ant.dev/src/views/components"
 	errPages "github.com/RazvanBerbece/ant.dev/src/views/pages/err"

@@ -4,22 +4,22 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/RazvanBerbece/ant.dev/src/domain"
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
 )
 
 type LocalCommentsService struct {
-	StoredArticles []domain.Article
+	StoredArticles []models.Article
 	Logger         slog.Logger
 }
 
-func NewLocalCommentsService(articles []domain.Article, logger *slog.Logger) LocalCommentsService {
+func NewLocalCommentsService(articles []models.Article, logger *slog.Logger) LocalCommentsService {
 	return LocalCommentsService{
 		StoredArticles: articles,
 		Logger:         *logger,
 	}
 }
 
-func (s LocalCommentsService) Get(articleId int) ([]domain.ArticleComment, error) {
+func (s LocalCommentsService) Get(articleId int) ([]models.ArticleComment, error) {
 
 	for _, article := range s.StoredArticles {
 		if article.Id == articleId {
@@ -32,7 +32,7 @@ func (s LocalCommentsService) Get(articleId int) ([]domain.ArticleComment, error
 	return nil, fmt.Errorf("an error ocurred while reading the comments: article with ID %d does not exist", articleId)
 }
 
-func (s LocalCommentsService) Store(comment domain.ArticleComment) error {
+func (s LocalCommentsService) Store(comment models.ArticleComment) error {
 
 	for idx, article := range s.StoredArticles {
 		if article.Id == comment.ArticleId {
