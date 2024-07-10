@@ -18,5 +18,7 @@ build/
 infrastructure/
 
 src/views/**/*.templ
+src/publish/**/*.templ
+src/publish/*.md
 
 publish/articles/base/*
