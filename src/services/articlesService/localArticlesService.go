@@ -38,6 +38,7 @@ func (s LocalArticlesService) GetArticles() []models.Article {
 
 func (s LocalArticlesService) GetRecentArticles(n int) []models.Article {
 
-	return nil
+	// TODO: Actually implement this, instead of just returning all articles
+	return s.GetArticles()
 
 }
