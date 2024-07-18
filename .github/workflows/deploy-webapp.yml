@@ -95,7 +95,7 @@ jobs:
               --cpu=1 \
               --no-use-http2 \
               --no-allow-unauthenticated \
-              --set-env-vars USE_LOCAL_STORAGE="${{ env.USE_LOCAL_STORAGE_COMMENTS }}",ENV="${{ env.ENV }}"
+              --set-env-vars USE_LOCAL_STORAGE_COMMENTS="${{ env.USE_LOCAL_STORAGE_COMMENTS }}",ENV="${{ env.ENV }}"
             
       # - name: Ping homepage
       #   run: 'curl "${{ steps.deploy.outputs.url }}"'
