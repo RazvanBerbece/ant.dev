@@ -27,7 +27,7 @@ func (e Environment) IsProduction() bool {
 }
 
 func (e Environment) LogStartupStatus(logger slog.Logger) {
-	logger.Info("Webserver up and running",
+	logger.Info("Webserver up and running\n",
 		slog.String("Environment", e.env),
 		slog.String("Port", e.Port),
 		slog.String("UseLocalStorageForComments", e.useLocalStorageForComments),

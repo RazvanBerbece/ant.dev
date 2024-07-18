@@ -19,6 +19,7 @@ env:
   SERVICE_NAME: "antdev-webapp"
   REGION: europe-west2
   # Golang app env variables
+  WEBAPP_PORT: 8080
   USE_LOCAL_STORAGE_COMMENTS: "1"
   ENV: "production"
 
@@ -89,7 +90,7 @@ jobs:
             gcloud run deploy ${{ env.SERVICE_NAME }} \
               --image ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GC_PROJECT_ID }}/${{ secrets.GC_DOCKER_ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ steps.vars.outputs.GITHUB_SHA }} \
               --region ${{ env.REGION }} \
-              --port=8080 \
+              --port=${{ env.WEBAPP_PORT }} \
               --min-instances=0 \
               --max-instances=1 \
               --cpu=1 \
