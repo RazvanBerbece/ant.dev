@@ -18,7 +18,13 @@ build/
 infrastructure/
 
 src/views/**/*.templ
-src/publish/**/*.templ
-src/publish/*.md
 
-publish/articles/base/*
+publish/articles/base
+publish/articles/**/*.templ
+publish/*.md
+
+tailwind.config.js
+package.json
+package-lock.json
+node_modules/
+static/css/style.css

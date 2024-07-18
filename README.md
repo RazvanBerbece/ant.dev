@@ -15,5 +15,6 @@ Published at: https://antdev-webapp-elba5bz5xq-nw.a.run.app/ (TODO: Get a proper
 # How to Run
 
 1. Generate Go code from `.templ` files: `~/go/bin/templ generate`
-2. Run the containerised webapp: `docker compose up -d --remove-orphans --build`
-3. Bring down the containerised webapp: `docker compose down -v`
+2. (Optional) Build the available static styles: `npx tailwindcss build -i static/css/style.css -o static/css/tailwind.css -m`
+3. Run the containerised webapp: `docker compose up -d --remove-orphans --build`
+4. Bring down the containerised webapp: `docker compose down -v`

@@ -44,6 +44,7 @@ func HandleCommentsRequest(commentsService commentsService.CommentsService) func
 				// Error - Article with empty ID
 				w.WriteHeader(http.StatusBadRequest)
 				errPages.ErrGeneric(fmt.Sprintf("Can't request comments for an article with an empty ID: %s%s?articleId=", r.Host, r.URL.Path), http.StatusBadRequest).Render(r.Context(), w)
+				return
 			}
 		}
 

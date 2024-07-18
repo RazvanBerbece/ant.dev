@@ -3,6 +3,7 @@ services:
   antdev-blog:
     container_name: antdev-webapp
     environment:
+      ENV: local
       PORT: 8080
       USE_LOCAL_STORAGE_COMMENTS: "1"
     build:

@@ -18,6 +18,7 @@ import (
 
 // Application configuration
 var Environment = startup.NewEnvironment(
+	os.Getenv("ENV"),
 	os.Getenv("PORT"),
 	os.Getenv("USE_LOCAL_STORAGE_COMMENTS"),
 )
@@ -31,7 +32,10 @@ var CommentsService commentsService.CommentsService
 
 func main() {
 
-	InjectRuntimeDependencies()
+	InjectRuntimeDependencies(Environment)
+
+	// Serve static content (CSS, JS, images, etc.)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	// Simple page handlers
 	http.Handle("/", templ.Handler(pages.Index(ArticlesService.GetRecentArticles(3))))
@@ -49,14 +53,14 @@ func main() {
 }
 
 // Runtime injections and swaps
-// (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, DB stuff etc.)
-func InjectRuntimeDependencies() {
+// (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, other configurations, etc.)
+func InjectRuntimeDependencies(env startup.Environment) {
 
 	// Articles service - Retrieving available (i.e published) articles from the locally defined slice
 	ArticlesService = articlesService.NewLocalArticlesService(publish.PublishedArticles)
 
 	// Comments service - Retrieving and storing comments under articles
-	if Environment.UsesLocalStorageForComments() {
+	if env.UsesLocalStorageForComments() {
 		CommentsService = commentsService.NewLocalCommentsService(ArticlesService.GetArticles(), Logger)
 	} else {
 		// TODO: Support storage of comments in a DB ? blob storage ?
