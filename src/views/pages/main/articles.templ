@@ -23,7 +23,7 @@ templ Articles(publishedArticles []models.Article) {
 									article.Id,
 									article.Title,
 									time.Unix(article.CreatedAt, 0).UTC().Format("January 2, 2006"),
-									article.ThumbnailImageUrl,
+									article.ThumbnailImagePath,
 									article.ThumbnailImageAlt,
 									article.Tags)
 							}

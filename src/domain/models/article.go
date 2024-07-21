@@ -18,8 +18,8 @@ type Article struct {
 	// List of tags associated with the article
 	Tags []ArticleTag
 
-	// The URL which points to the thumbnail image of the article
-	ThumbnailImageUrl string
+	// The URL or statics path which points to the thumbnail image of the article
+	ThumbnailImagePath string
 
 	// Alt value to use for the thumbnail image
 	ThumbnailImageAlt string

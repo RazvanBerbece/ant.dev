@@ -9,6 +9,7 @@ import (
 
 	"github.com/RazvanBerbece/ant.dev/publish"
 	"github.com/RazvanBerbece/ant.dev/src/handlers"
+	"github.com/RazvanBerbece/ant.dev/src/repositories/articleComments"
 	"github.com/RazvanBerbece/ant.dev/src/services/articlesService"
 	"github.com/RazvanBerbece/ant.dev/src/services/commentsService"
 	"github.com/RazvanBerbece/ant.dev/src/startup"
@@ -26,13 +27,16 @@ var Environment = startup.NewEnvironment(
 // Infrastructure
 var Logger = slog.Default()
 
+// Repositories
+var ArticleCommentsRepository articleComments.ArticleCommentsDataRepository
+
 // Services
 var ArticlesService articlesService.ArticlesService
 var CommentsService commentsService.CommentsService
 
 func main() {
 
-	InjectRuntimeDependencies(Environment)
+	InjectRuntimeDependencies(Environment, *Logger)
 
 	// Serve static content (CSS, JS, images, etc.)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
@@ -54,16 +58,22 @@ func main() {
 
 // Runtime injections and swaps
 // (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, other configurations, etc.)
-func InjectRuntimeDependencies(env startup.Environment) {
+func InjectRuntimeDependencies(env startup.Environment, logger slog.Logger) {
 
-	// Articles service - Retrieving available (i.e published) articles from the locally defined slice
 	ArticlesService = articlesService.NewLocalArticlesService(publish.PublishedArticles)
 
-	// Comments service - Retrieving and storing comments under articles
 	if env.UsesLocalStorageForComments() {
-		CommentsService = commentsService.NewLocalCommentsService(ArticlesService.GetArticles(), Logger)
+		//
+		// Use local runtime memory for storing & retrieving comments and other artifacts
+		//
+		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(logger, ArticlesService.GetArticles())
 	} else {
+		//
+		// Use a managed DB to store & retrieve comments and other artifacts
+		//
 		// TODO: Support storage of comments in a DB ? blob storage ?
-		CommentsService = commentsService.NewManagedCommentsService(Logger)
+		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(logger, "NotSupportedYet")
 	}
+
+	CommentsService = commentsService.NewCommentsService(Logger, ArticleCommentsRepository)
 }

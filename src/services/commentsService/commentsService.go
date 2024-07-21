@@ -1,8 +1,46 @@
 package commentsService
 
-import "github.com/RazvanBerbece/ant.dev/src/domain/models"
+import (
+	"fmt"
+	"log/slog"
 
-type CommentsService interface {
-	Get(articleId int) ([]models.ArticleComment, error)
-	Store(comment models.ArticleComment) error
+	"github.com/RazvanBerbece/ant.dev/src/domain/models"
+	"github.com/RazvanBerbece/ant.dev/src/repositories/articleComments"
+)
+
+type CommentsService struct {
+	Logger                    slog.Logger
+	articleCommentsRepository articleComments.ArticleCommentsDataRepository
+}
+
+func NewCommentsService(
+	logger *slog.Logger,
+	articleCommentsRepository articleComments.ArticleCommentsDataRepository,
+) CommentsService {
+	return CommentsService{
+		Logger:                    *logger,
+		articleCommentsRepository: articleCommentsRepository,
+	}
+}
+
+func (s CommentsService) Get(articleId int) ([]models.ArticleComment, error) {
+
+	commentsForArticle, err := s.articleCommentsRepository.Get(articleId)
+	if err != nil {
+		s.Logger.Error(err.Error())
+		return nil, fmt.Errorf("could not retrieve comments for article with ID %d", articleId)
+	}
+
+	return commentsForArticle, nil
+}
+
+func (s CommentsService) Store(comment models.ArticleComment) error {
+
+	err := s.articleCommentsRepository.Store(comment)
+	if err != nil {
+		s.Logger.Error(err.Error())
+		return fmt.Errorf("could not store new comment for article with ID %d", comment.ArticleId)
+	}
+
+	return nil
 }

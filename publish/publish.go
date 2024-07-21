@@ -27,9 +27,9 @@ var PublishedArticles = []models.Article{
 			{Value: "1BRC", BgColour: "bg-red-800", TextColour: "text-white"},
 			{Value: "Optimisation", BgColour: "bg-green-800", TextColour: "text-white"},
 		},
-		ThumbnailImageUrl: "https://static01.nyt.com/images/2021/09/14/science/07CAT-STRIPES/07CAT-STRIPES-superJumbo.jpg?quality=75&auto=webp",
-		ThumbnailImageAlt: "cat picture (credits: Stephen Hyde / Alamy Stock Photo)",
-		Comments:          []models.ArticleComment{},
+		ThumbnailImagePath: "/static/img/article_1_thumbnail.webp",
+		ThumbnailImageAlt:  "cat picture (credits: Stephen Hyde / Alamy Stock Photo)",
+		Comments:           []models.ArticleComment{},
 	},
 	// Article 2
 	// etc...
