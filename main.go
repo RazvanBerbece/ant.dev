@@ -66,6 +66,9 @@ func main() {
 // (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, other configurations, etc.)
 func InjectRuntimeDependencies() {
 
+	const RepositoryLayerName string = "Repository"
+	const ServiceLayerName string = "Service"
+
 	///////////////////////////////////////////////////////////////
 	// Data Repositories
 	///////////////////////////////////////////////////////////////
@@ -74,7 +77,7 @@ func InjectRuntimeDependencies() {
 		// Use local runtime memory for storing & retrieving comments and other artifacts
 		//
 		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(
-			startup.NewDependencyLogger(JsonHandler, "Repository", "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(JsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			publish.PublishedArticles,
 		)
 	} else {
@@ -83,7 +86,7 @@ func InjectRuntimeDependencies() {
 		//
 		// TODO: Support storage of comments in a DB ? blob storage ?
 		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(
-			startup.NewDependencyLogger(JsonHandler, "Repository", "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(JsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			"NotSupportedYet",
 		)
 	}
@@ -92,11 +95,11 @@ func InjectRuntimeDependencies() {
 	// Services
 	///////////////////////////////////////////////////////////////
 	ArticlesService = articlesService.NewLocalArticlesService(
-		startup.NewDependencyLogger(JsonHandler, "Service", "ArticlesService"),
+		startup.NewDependencyLogger(JsonHandler, ServiceLayerName, "ArticlesService"),
 		publish.PublishedArticles,
 	)
 	CommentsService = commentsService.NewCommentsService(
-		startup.NewDependencyLogger(JsonHandler, "Service", "CommentsService"),
+		startup.NewDependencyLogger(JsonHandler, ServiceLayerName, "CommentsService"),
 		ArticleCommentsRepository,
 	)
 }
