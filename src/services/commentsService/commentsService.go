@@ -42,7 +42,11 @@ func (s CommentsService) Store(comment models.ArticleComment) error {
 		return fmt.Errorf("could not store new comment for article with ID %d", comment.ArticleId)
 	}
 
-	go s.Logger.Info("Stored a new comment", "article_id", comment.ArticleId, "author", comment.Author)
+	go s.Logger.Info("Stored a new comment",
+		slog.Group("context",
+			"article_id", comment.ArticleId,
+			"author", comment.Author,
+			"createdAt", comment.CreatedAt))
 
 	return nil
 }

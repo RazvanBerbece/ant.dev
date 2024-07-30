@@ -26,7 +26,7 @@ func (s LocalArticlesService) GetArticle(id int) *models.Article {
 
 	for _, article := range s.StoredArticles {
 		if article.Id == id {
-			go s.Logger.Info("Retrieved article from runtime slice", "article_id", id)
+			go s.Logger.Info("Retrieved article from runtime slice", slog.Group("context", "article_id", id))
 			return &article
 		}
 	}
