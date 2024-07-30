@@ -25,12 +25,11 @@ var Environment = startup.NewEnvironment(
 )
 
 // Output writers
-var JsonHandler = slog.NewJSONHandler(os.Stdout, nil)
-
-// Loggers
-var DefaultLogger = startup.NewLayerLogger(JsonHandler, "Root")
+var StdoutJsonHandler = slog.NewJSONHandler(os.Stdout, nil)
 
 // Infrastructure
+var DefaultLogger = startup.NewLayerLogger(StdoutJsonHandler, "Root")
+
 // var Database = Database()...
 
 // Repositories
@@ -63,7 +62,7 @@ func main() {
 }
 
 // Runtime injections and swaps
-// (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, other configurations, etc.)
+// (i.e use runtime or DB storage for comments under articles, use runtime list of articles as available publishings, other configurations, etc.)
 func InjectRuntimeDependencies() {
 
 	const RepositoryLayerName string = "Repository"
@@ -77,7 +76,7 @@ func InjectRuntimeDependencies() {
 		// Use local runtime memory for storing & retrieving comments and other artifacts
 		//
 		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(
-			startup.NewDependencyLogger(JsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(StdoutJsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			publish.PublishedArticles,
 		)
 	} else {
@@ -86,7 +85,7 @@ func InjectRuntimeDependencies() {
 		//
 		// TODO: Support storage of comments in a DB ? blob storage ?
 		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(
-			startup.NewDependencyLogger(JsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(StdoutJsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			"NotSupportedYet",
 		)
 	}
@@ -95,11 +94,11 @@ func InjectRuntimeDependencies() {
 	// Services
 	///////////////////////////////////////////////////////////////
 	ArticlesService = articlesService.NewLocalArticlesService(
-		startup.NewDependencyLogger(JsonHandler, ServiceLayerName, "ArticlesService"),
+		startup.NewDependencyLogger(StdoutJsonHandler, ServiceLayerName, "ArticlesService"),
 		publish.PublishedArticles,
 	)
 	CommentsService = commentsService.NewCommentsService(
-		startup.NewDependencyLogger(JsonHandler, ServiceLayerName, "CommentsService"),
+		startup.NewDependencyLogger(StdoutJsonHandler, ServiceLayerName, "CommentsService"),
 		ArticleCommentsRepository,
 	)
 }
