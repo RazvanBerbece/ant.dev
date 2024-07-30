@@ -14,11 +14,11 @@ type CommentsService struct {
 }
 
 func NewCommentsService(
-	logger *slog.Logger,
+	logger slog.Logger,
 	articleCommentsRepository articleComments.ArticleCommentsDataRepository,
 ) CommentsService {
 	return CommentsService{
-		Logger:                    *logger,
+		Logger:                    logger,
 		articleCommentsRepository: articleCommentsRepository,
 	}
 }
@@ -41,6 +41,8 @@ func (s CommentsService) Store(comment models.ArticleComment) error {
 		s.Logger.Error(err.Error())
 		return fmt.Errorf("could not store new comment for article with ID %d", comment.ArticleId)
 	}
+
+	go s.Logger.Info("Stored a new comment", "article_id", comment.ArticleId, "author", comment.Author)
 
 	return nil
 }
