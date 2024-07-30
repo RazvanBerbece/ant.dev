@@ -24,9 +24,11 @@ var Environment = startup.NewEnvironment(
 	os.Getenv("USE_LOCAL_STORAGE_COMMENTS"),
 )
 
-// Default logging
+// Output writers
 var JsonHandler = slog.NewJSONHandler(os.Stdout, nil)
-var DefaultLogger = slog.New(JsonHandler).With("layer", "Root")
+
+// Loggers
+var DefaultLogger = startup.NewLayerLogger(JsonHandler, "Root")
 
 // Infrastructure
 // var Database = Database()...
@@ -54,7 +56,7 @@ func main() {
 	http.HandleFunc("/articles", handlers.HandleArticleRequest(ArticlesService))  // GET /articles, GET /articles?id=
 	http.HandleFunc("/comments", handlers.HandleCommentsRequest(CommentsService)) // GET /comments?articleId=, POST Form-Data /comments?articleId=
 
-	Environment.LogStartupStatus(*DefaultLogger)
+	Environment.LogStartupStatus(DefaultLogger)
 
 	// Blocking call! - Listen and serve
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", Environment.Port), nil))
@@ -64,44 +66,37 @@ func main() {
 // (i.e use local or DB storage for comments under articles, use local list of articles as available publishings, other configurations, etc.)
 func InjectRuntimeDependencies() {
 
-	/////////////////////////////////////////////////////////////////
-	// LOGGERS
-	/////////////////////////////////////////////////////////////////
-
-	// Data repository loggers
-	var ArticleCommentsRepositoryLogger = slog.New(JsonHandler).With(
-		"layer", "Repository",
-		"repository_name", "ArticleCommentsRepository",
-	)
-
-	// Service loggers
-	var ArticlesServiceLogger = slog.New(JsonHandler).With(
-		"layer", "Service",
-		"service_name", "ArticlesService",
-	)
-	var CommentsServiceLogger = slog.New(JsonHandler).With(
-		"layer", "Service",
-		"service_name", "CommentsService",
-	)
-
-	/////////////////////////////////////////////////////////////////
-	// DATA REPOSITORIES & SERVICES
-	/////////////////////////////////////////////////////////////////
-
-	ArticlesService = articlesService.NewLocalArticlesService(*ArticlesServiceLogger, publish.PublishedArticles)
-
+	///////////////////////////////////////////////////////////////
+	// Data Repositories
+	///////////////////////////////////////////////////////////////
 	if Environment.UsesLocalStorageForComments() {
 		//
 		// Use local runtime memory for storing & retrieving comments and other artifacts
 		//
-		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(*ArticleCommentsRepositoryLogger, ArticlesService.GetArticles())
+		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(
+			startup.NewDependencyLogger(JsonHandler, "Repository", "ArticleCommentsRepository"),
+			publish.PublishedArticles,
+		)
 	} else {
 		//
 		// Use a managed DB to store & retrieve comments and other artifacts
 		//
 		// TODO: Support storage of comments in a DB ? blob storage ?
-		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(*ArticleCommentsRepositoryLogger, "NotSupportedYet")
+		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(
+			startup.NewDependencyLogger(JsonHandler, "Repository", "ArticleCommentsRepository"),
+			"NotSupportedYet",
+		)
 	}
 
-	CommentsService = commentsService.NewCommentsService(*CommentsServiceLogger, ArticleCommentsRepository)
+	///////////////////////////////////////////////////////////////
+	// Services
+	///////////////////////////////////////////////////////////////
+	ArticlesService = articlesService.NewLocalArticlesService(
+		startup.NewDependencyLogger(JsonHandler, "Service", "ArticlesService"),
+		publish.PublishedArticles,
+	)
+	CommentsService = commentsService.NewCommentsService(
+		startup.NewDependencyLogger(JsonHandler, "Service", "CommentsService"),
+		ArticleCommentsRepository,
+	)
 }
