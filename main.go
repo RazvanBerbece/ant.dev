@@ -10,6 +10,7 @@ import (
 	"github.com/RazvanBerbece/ant.dev/publish"
 	"github.com/RazvanBerbece/ant.dev/src/handlers"
 	"github.com/RazvanBerbece/ant.dev/src/repositories/articleComments"
+	"github.com/RazvanBerbece/ant.dev/src/repositories/articles"
 	"github.com/RazvanBerbece/ant.dev/src/services/articlesService"
 	"github.com/RazvanBerbece/ant.dev/src/services/commentsService"
 	"github.com/RazvanBerbece/ant.dev/src/startup"
@@ -34,6 +35,7 @@ var DefaultLogger slog.Logger
 // var Database = Database()...
 
 // Repositories
+var ArticlesRepository articles.ArticlesDataRepository
 var ArticleCommentsRepository articleComments.ArticleCommentsDataRepository
 
 // Services
@@ -82,6 +84,11 @@ func InjectRuntimeDependencies() {
 	///////////////////////////////////////////////////////////////
 	// Data Repositories
 	///////////////////////////////////////////////////////////////
+	ArticlesRepository = articles.NewLocalArticlesDataRepository(
+		startup.NewDependencyLogger(StdoutWriterHandler, RepositoryLayerName, "ArticlesRepository"),
+		publish.PublishedArticles,
+	)
+
 	if Environment.UsesLocalStorageForComments() {
 		//
 		// Use local runtime memory for storing & retrieving comments and other artifacts
@@ -106,8 +113,9 @@ func InjectRuntimeDependencies() {
 	///////////////////////////////////////////////////////////////
 	ArticlesService = articlesService.NewLocalArticlesService(
 		startup.NewDependencyLogger(StdoutWriterHandler, ServiceLayerName, "ArticlesService"),
-		publish.PublishedArticles,
+		ArticlesRepository,
 	)
+
 	CommentsService = commentsService.NewCommentsService(
 		startup.NewDependencyLogger(StdoutWriterHandler, ServiceLayerName, "CommentsService"),
 		ArticleCommentsRepository,
