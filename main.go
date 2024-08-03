@@ -22,13 +22,14 @@ var Environment = startup.NewEnvironment(
 	os.Getenv("ENV"),
 	os.Getenv("PORT"),
 	os.Getenv("USE_LOCAL_STORAGE_COMMENTS"),
+	os.Getenv("LOG_FORMAT"),
 )
 
 // Output writers
-var StdoutJsonHandler = slog.NewJSONHandler(os.Stdout, nil)
+var StdoutWriterHandler slog.Handler
 
 // Infrastructure
-var DefaultLogger = startup.NewLayerLogger(StdoutJsonHandler, "Root")
+var DefaultLogger slog.Logger
 
 // var Database = Database()...
 
@@ -69,6 +70,16 @@ func InjectRuntimeDependencies() {
 	const ServiceLayerName string = "Service"
 
 	///////////////////////////////////////////////////////////////
+	// Logging
+	///////////////////////////////////////////////////////////////
+	if Environment.LogFormat == "JSON" {
+		StdoutWriterHandler = slog.NewJSONHandler(os.Stdout, nil)
+	} else { // TEXT
+		StdoutWriterHandler = slog.NewTextHandler(os.Stdout, nil)
+	}
+	DefaultLogger = startup.NewLayerLogger(StdoutWriterHandler, "Root")
+
+	///////////////////////////////////////////////////////////////
 	// Data Repositories
 	///////////////////////////////////////////////////////////////
 	if Environment.UsesLocalStorageForComments() {
@@ -76,7 +87,7 @@ func InjectRuntimeDependencies() {
 		// Use local runtime memory for storing & retrieving comments and other artifacts
 		//
 		ArticleCommentsRepository = articleComments.NewLocalArticleCommentsDataRepository(
-			startup.NewDependencyLogger(StdoutJsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(StdoutWriterHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			publish.PublishedArticles,
 		)
 	} else {
@@ -85,7 +96,7 @@ func InjectRuntimeDependencies() {
 		//
 		// TODO: Support storage of comments in a DB ? blob storage ?
 		ArticleCommentsRepository = articleComments.NewManagedArticleCommentsDataRepository(
-			startup.NewDependencyLogger(StdoutJsonHandler, RepositoryLayerName, "ArticleCommentsRepository"),
+			startup.NewDependencyLogger(StdoutWriterHandler, RepositoryLayerName, "ArticleCommentsRepository"),
 			"NotSupportedYet",
 		)
 	}
@@ -94,11 +105,11 @@ func InjectRuntimeDependencies() {
 	// Services
 	///////////////////////////////////////////////////////////////
 	ArticlesService = articlesService.NewLocalArticlesService(
-		startup.NewDependencyLogger(StdoutJsonHandler, ServiceLayerName, "ArticlesService"),
+		startup.NewDependencyLogger(StdoutWriterHandler, ServiceLayerName, "ArticlesService"),
 		publish.PublishedArticles,
 	)
 	CommentsService = commentsService.NewCommentsService(
-		startup.NewDependencyLogger(StdoutJsonHandler, ServiceLayerName, "CommentsService"),
+		startup.NewDependencyLogger(StdoutWriterHandler, ServiceLayerName, "CommentsService"),
 		ArticleCommentsRepository,
 	)
 }

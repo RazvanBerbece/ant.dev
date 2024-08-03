@@ -19,9 +19,10 @@ env:
   SERVICE_NAME: "antdev-webapp"
   REGION: europe-west2
   # Golang app env variables
+  WEBAPP_ENV: "production"
   WEBAPP_PORT: 8080
-  USE_LOCAL_STORAGE_COMMENTS: "1"
-  ENV: "production"
+  WEBAPP_LOG_FORMAT: "JSON"
+  WEBAPP_USE_LOCAL_STORAGE_COMMENTS: "1"
 
 jobs:
 
@@ -96,7 +97,7 @@ jobs:
               --cpu=1 \
               --no-use-http2 \
               --no-allow-unauthenticated \
-              --set-env-vars USE_LOCAL_STORAGE_COMMENTS="${{ env.USE_LOCAL_STORAGE_COMMENTS }}",ENV="${{ env.ENV }}"
+              --set-env-vars ENV="${{ env.WEBAPP_ENV }}",LOG_FORMAT="${{ env.WEBAPP_LOG_FORMAT }}",USE_LOCAL_STORAGE_COMMENTS="${{ env.WEBAPP_USE_LOCAL_STORAGE_COMMENTS }}"
             
       # - name: Ping homepage
       #   run: 'curl "${{ steps.deploy.outputs.url }}"'

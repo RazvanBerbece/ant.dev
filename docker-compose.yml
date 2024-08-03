@@ -5,6 +5,7 @@ services:
     environment:
       ENV: local
       PORT: 8080
+      LOG_FORMAT: "TEXT"
       USE_LOCAL_STORAGE_COMMENTS: "1"
     build:
       dockerfile: Dockerfile
