@@ -1,0 +1,12 @@
+name: GHA Version Updater 
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+    update:
+        uses: RazvanBerbece/shared-workflows/.github/workflows/update_gh_dependencies.yml@main
+        secrets:
+            PAT: ${{ secrets.DEV_BOT_TOKEN }}
+        
