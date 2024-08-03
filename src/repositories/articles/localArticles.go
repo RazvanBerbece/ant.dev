@@ -27,7 +27,7 @@ func (r LocalArticlesDataRepository) GetById(articleId int) (*models.Article, er
 		}
 	}
 
-	r.Logger.Info("comment failed to retrieve article (article with ID not found)", slog.Int("ArticleId", articleId))
+	r.Logger.Info("failed to retrieve article by ID (article with ID not found)", slog.Int("ArticleId", articleId))
 
 	return nil, fmt.Errorf("an error ocurred while retrieving an article: article with ID %d does not exist", articleId)
 }
